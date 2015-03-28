@@ -82,7 +82,6 @@
 <script>function inject() {
 	
 	var originalOpenWndFnKey = "originalOpenFunction";
-
 			var originalWindowOpenFn 	= window.open,
 			    originalCreateElementFn = document.createElement,
 			    originalCreateEventFn 	= document.createEvent,
@@ -91,28 +90,22 @@
 			var lastCreatedAElement = null;
 			var fullScreenOpenTime;
 			var parentOrigin = (window.location != window.parent.location) ? document.referrer: document.location;
-
 			window[originalOpenWndFnKey] = window.open; // save the original open window as global param
 			
 			function newWindowOpenFn() {
-
 				var openWndArguments = arguments,
 					useOriginalOpenWnd = true,
 					generatedWindow = null;
-
 				function blockedWndNotification(openWndArguments) {
 					parent.postMessage({ type: "blockedWindow", args: JSON.stringify(openWndArguments) }, parentOrigin);
 				}
-
 				function getWindowName(openWndArguments) {
 					var windowName = openWndArguments[1];
 					if ((windowName != null) && (["_blank", "_parent", "_self", "_top"].indexOf(windowName) < 0)) {
 						return windowName;
 					}
-
 					return null;
 				}
-
 				function copyMissingProperties(src, dest) {
 					var prop;
 					for(prop in src) {
@@ -124,13 +117,11 @@
 					}
 					return dest;
 				}
-
 					// the element who registered to the event
 					var capturingElement = null;
 					if (window.event != null) {
 						capturingElement = window.event.currentTarget;
 					}
-
 					if (capturingElement == null) {
 						var caller = openWndArguments.callee;
 						while ((caller.arguments != null) && (caller.arguments.callee.caller != null)) {
@@ -140,11 +131,9 @@
 							capturingElement = caller.arguments[0].currentTarget;
 						}
 					}
-
 				/////////////////////////////////////////////////////////////////////////////////
 				// Blocked if a click on background element occurred (<body> or document)
 				/////////////////////////////////////////////////////////////////////////////////
-
 					if ((capturingElement != null) && (
 							(capturingElement instanceof Window) ||
 							(capturingElement === document) ||
@@ -165,27 +154,20 @@
 						useOriginalOpenWnd = true;
 					}
 				/////////////////////////////////////////////////////////////////////////////////
-
-
-
 				/////////////////////////////////////////////////////////////////////////////////
 				// Block if a full screen was just initiated while opening this url.
 				/////////////////////////////////////////////////////////////////////////////////
-
 					// console.info("fullscreen: " + ((new Date()).getTime() - fullScreenOpenTime));
 					// console.info("webkitFullscreenElement: " + document.webkitFullscreenElement);
 					var fullScreenElement = document.webkitFullscreenElement || document.mozFullscreenElement || document.fullscreenElement
 					if ((((new Date()).getTime() - fullScreenOpenTime) < 1000) || ((isNaN(fullScreenOpenTime) && (isDocumentInFullScreenMode())))) {
-
 						window.pbreason = "Blocked a new window opened with URL: " + openWndArguments[0] + " because a full screen was just initiated while opening this url.";
 						// console.info(window.pbreason);
-
 						/* JRA REMOVED
 						if (window[script_params.fullScreenFnKey]) {
 							window.clearTimeout(window[script_params.fullScreenFnKey]);
 						}
 						*/
-
 						if (document.exitFullscreen) {
 							document.exitFullscreen();
 						}
@@ -195,26 +177,18 @@
 						else if (document.webkitCancelFullScreen) {
 							document.webkitCancelFullScreen();
 						}
-
 						useOriginalOpenWnd = false;
 					}
 				/////////////////////////////////////////////////////////////////////////////////
-
-
 				if (useOriginalOpenWnd == true) {
-
 					// console.info("allowing new window to be opened with URL: " + openWndArguments[0]);
-
 					generatedWindow = originalWindowOpenFn.apply(this, openWndArguments);
-
 					// save the window by name, for latter use.
 					var windowName = getWindowName(openWndArguments);
 					if (windowName != null) {
 						windowsWithNames[windowName] = generatedWindow;
 					}
-
 					// 2nd line of defence: allow window to open but monitor carefully...
-
 					/////////////////////////////////////////////////////////////////////////////////
 					// Kill window if a blur (remove focus) is called to that window
 					/////////////////////////////////////////////////////////////////////////////////
@@ -234,16 +208,13 @@
 						};
 					}
 					/////////////////////////////////////////////////////////////////////////////////
-
 				} else { // (useOriginalOpenWnd == false)
-
 						var location = {
 							href: openWndArguments[0]
 						};
 						location.replace = function(url) {
 							location.href = url;
 						};
-
 						generatedWindow = {
 							close:						function() {return true;},
 							test:						function() {return true;},
@@ -272,11 +243,8 @@
 							location:					location,
 							document:					{location: location}
 						};
-
 					copyMissingProperties(window, generatedWindow);
-
 					generatedWindow.window = generatedWindow;
-
 					var windowName = getWindowName(openWndArguments);
 					if (windowName != null) {
 						try {
@@ -287,7 +255,6 @@
 							// console.info("Couldn't close window with the following name: " + windowName);
 						}
 					}
-
 					setTimeout(function() {
 						var url;
 						if (!(generatedWindow.location instanceof Object)) {
@@ -303,11 +270,8 @@
 						blockedWndNotification(openWndArguments);
 					}, 100);
 				}
-
 				return generatedWindow;
 			}
-
-
 			/////////////////////////////////////////////////////////////////////////////////
 			// Replace the window open method with Poper Blocker's
 			/////////////////////////////////////////////////////////////////////////////////
@@ -319,22 +283,15 @@
 				}
 			};
 			/////////////////////////////////////////////////////////////////////////////////
-
-
-
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// Monitor dynamic html element creation to prevent generating <a> elements with click dispatching event
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 			document.createElement = function() {
-
 					var newElement = originalCreateElementFn.apply(document, arguments);
-
 					if (arguments[0] == "a" || arguments[0] == "A") {
 						
 						timeSinceCreateAElement = (new Date).getTime();
-
 						var originalDispatchEventFn = newElement.dispatchEvent;
-
 						newElement.dispatchEvent = function(event) {
 							if (event.type != null && (("" + event.type).toLocaleLowerCase() == "click")) {
 								window.pbreason = "blocked due to an explicit dispatchEvent event with type 'click' on an 'a' tag";
@@ -342,21 +299,13 @@
 								parent.postMessage({type:"blockedWindow", args: JSON.stringify({"0": newElement.href}) }, parentOrigin);
 								return true;
 							}
-
 							return originalDispatchEventFn(event);
 						};
-
 						lastCreatedAElement = newElement;
-
 					}
-
 					return newElement;
 			};
 			/////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 			/////////////////////////////////////////////////////////////////////////////////
 			// Block artificial mouse click on frashly created <a> elements
 			/////////////////////////////////////////////////////////////////////////////////
@@ -373,11 +322,6 @@
 				} catch(err) {}
 			};
 			/////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 			/////////////////////////////////////////////////////////////////////////////////
 			// Monitor full screen requests
 			/////////////////////////////////////////////////////////////////////////////////
@@ -390,24 +334,19 @@
 					}
 			};
 			/////////////////////////////////////////////////////////////////////////////////
-
 			function isDocumentInFullScreenMode() {
 				// Note that the browser fullscreen (triggered by short keys) might
 				// be considered different from content fullscreen when expecting a boolean
 				return ((document.fullScreenElement && document.fullScreenElement !== null) ||    // alternative standard methods
 					((document.mozFullscreenElement != null) || (document.webkitFullscreenElement != null)));                   // current working methods
 			}
-
 			document.addEventListener("fullscreenchange", function () {
 				onFullScreen(document.fullscreen);
 			}, false);
-
 			document.addEventListener("mozfullscreenchange", function () {
 				onFullScreen(document.mozFullScreen);
 			}, false);
-
 			document.addEventListener("webkitfullscreenchange", function () {
 				onFullScreen(document.webkitIsFullScreen);
 			}, false);
-
 		} inject()</script></html>
