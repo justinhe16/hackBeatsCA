@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Recordings | MixTape</title>
+
+        <link href="css/app.min.css" rel="stylesheet">
+        <link href="css/animate.min.css" rel="stylesheet">
+        <link href="css/jquery.bootgrid.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <header id="header">
+            <ul class="header-inner">
+                <li id="menu-trigger" data-trigger="#sidebar">
+                    <div class="line-wrap">
+                        <div class="line top"></div>
+                        <div class="line center"></div>
+                        <div class="line bottom"></div>
+                    </div>
+                </li>
+
+                <li class="logo hidden-xs">
+                    <a href="index.html">MixTape</a>
+                </li>
+
+                <li class="pull-right">
+                <ul class="top-menu">
+                    <li id="top-search">
+                        <a class="tm-search" href=""></a>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-notification" href=""><i class="tmn-counts">9</i></a>
+                        <div class="dropdown-menu dropdown-menu-lg pull-right">
+                            <div class="listview" id="notifications">
+                                <div class="lv-header">
+                                    Notification
+
+                                    <ul class="actions">
+                                        <li class="dropdown">
+                                            <a href="" data-clear="notification">
+                                                <i class="md md-done-all"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="lv-body">
+                                    <a class="lv-item" href="">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <img class="lv-img-sm" src="img/profile-pics/hackbca.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title">Liang Gao</div>
+                                                <small class="lv-small">Fork your recording "???"</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="lv-item" href="">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <img class="lv-img-sm" src="img/profile-pics/hackbca.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title">Rachel Zhou</div>
+                                                <small class="lv-small">Commented on your recording "???"</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="lv-item" href="">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <img class="lv-img-sm" src="img/profile-pics/hackbca.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title">Justin He</div>
+                                                <small class="lv-small">Starred your recording "The Best Hackthon 2"</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="lv-item" href="">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <img class="lv-img-sm" src="img/profile-pics/hackbca.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title">Andy Gao</div>
+                                                <small class="lv-small">Fork your recording "???"</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="lv-item" href="">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <img class="lv-img-sm" src="img/profile-pics/hackbca.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title">Cat Limo</div>
+                                                <small class="lv-small">Limo fire, kills bride</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <a class="lv-footer" href="">View Previous</a>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-settings" href=""></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="">Refresh</a>
+                            </li>
+                            <li>
+                                <a href="">Settings</a>
+                            </li>
+                            <li>
+                                <a href="">Full Screen</a>
+                            </li>
+                        </ul>
+                    </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Top Search Content -->
+            <div id="top-search-wrap">
+                <input type="text">
+                <i id="top-search-close">&times;</i>
+            </div>
+        </header>
+
+        <section id="main">
+            <aside id="sidebar">
+                <div class="sidebar-inner">
+                    <div class="profile-menu">
+                        <a href="" data-toggle="dropdown">
+                            <div class="profile-pic">
+                                <img src="img/profile-pics/hackbca.png" alt="">
+                            </div>
+
+                            <div class="profile-info">
+                                hackBCA II
+
+                                <i class="md md-arrow-drop-down"></i>
+                            </div>
+                        </a>
+
+                        <ul class="main-menu">
+                            <li>
+                                <a href=""><i class="md md-person"></i> View Profile</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="md md-settings-input-antenna"></i> Privacy Settings</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="md md-settings"></i> Settings</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="md md-history"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="main-menu">
+                        <li><a href="index.html"><i class="md md-home"></i> Home</a></li>
+                        <li class="sub-menu active toggled">
+                            <a href=""><i class="md md-view-list"></i> Explore</a>
+
+                            <ul>
+                                <li><a href="">Trending</a></li>
+                                <li><a class="active" href="recordings.html">All Recordings</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href=""><i class="md md-now-widgets"></i> My Library</a>
+
+                            <ul>
+                                <li><a href="original.html">Original</a></li>
+                                <li><a href="">Forks</a></li>
+                                <li><a href="">Stars</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="statistics.html"><i class="md md-trending-up"></i>Statistics</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section id="content">
+                <div class="container">
+                    <div class="block-header">
+                        <h2>All Recordings</h2>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Demo <small>Click on Edit button to tweak it or Plus button to add to your library</small></h2>
+                        </div>
+
+                        <table id="data-table-command" class="table table-striped table-vmiddle">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric">ID</th>
+                                    <th data-column-id="author">Author</th>
+                                    <th data-column-id="created" data-order="desc">Created</th>
+                                    <th data-column-id="commands" data-formatter="commands" data-sortable="false">Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                        <tr>
+                                    <td>10238</td>
+                                    <td>Flappy Bird</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10243</td>
+                                    <td>Flappy Bird</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10248</td>
+                                    <td>Flappy Bird</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10253</td>
+                                    <td>Flappy Bird</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10234</td>
+                                    <td>Nyan Cat</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10239</td>
+                                    <td>Nyan Cat</td>
+                                    <td>03.28.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10244</td>
+                                    <td>Nyan Cat</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10249</td>
+                                    <td>Nyan Cat</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10237</td>
+                                    <td>Doge</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10242</td>
+                                    <td>Doge</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10247</td>
+                                    <td>Doge</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10252</td>
+                                    <td>Doge</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10236</td>
+                                    <td>Teemo</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10241</td>
+                                    <td>Teemo</td>
+                                    <td>03.29.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10246</td>
+                                    <td>Teemo</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10251</td>
+                                    <td>Teemo</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10235</td>
+                                    <td>hackBCA</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10240</td>
+                                    <td>hackBCA</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10245</td>
+                                    <td>hackBCA</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                                <tr>
+                                    <td>10250</td>
+                                    <td>hackBCA</td>
+                                    <td>03.30.2015</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <!-- Javascript Libraries -->
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.bootgrid.min.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+        <script src="js/bootstrap-growl.min.js"></script>
+        <script src="js/functions.js"></script>
+
+
+        <!-- Data Table -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //Basic Example
+                $("#data-table-basic").bootgrid({
+                    css: {
+                        icon: 'md icon',
+                        iconColumns: 'md-view-module',
+                        iconDown: 'md-expand-more',
+                        iconRefresh: 'md-refresh',
+                        iconUp: 'md-expand-less'
+                    },
+                });
+
+                //Selection
+                $("#data-table-selection").bootgrid({
+                    css: {
+                        icon: 'md icon',
+                        iconColumns: 'md-view-module',
+                        iconDown: 'md-expand-more',
+                        iconRefresh: 'md-refresh',
+                        iconUp: 'md-expand-less'
+                    },
+                    selection: true,
+                    multiSelect: true,
+                    rowSelect: true,
+                    keepSelection: true
+                });
+
+                //Command Buttons
+                $("#data-table-command").bootgrid({
+                    css: {
+                        icon: 'md icon',
+                        iconColumns: 'md-view-module',
+                        iconDown: 'md-expand-more',
+                        iconRefresh: 'md-refresh',
+                        iconUp: 'md-expand-less'
+                    },
+                    formatters: {
+                        "commands": function(column, row) {
+                            return "<button type=\"button\" class=\"btn btn-icon command-edit\" data-row-id=\"" + row.id + "\"><span class=\"md md-edit\"></span></button> " +
+                                "<button type=\"button\" class=\"btn btn-icon command-delete\" data-row-id=\"" + row.id + "\"><span class=\"md md-star\"></span></button>" +
+                                "<button type=\"button\" class=\"btn btn-icon command-edit\" data-row-id=\"" + row.id + "\"><span class=\"md md-get-app\"></span></button>";
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+  </html>
