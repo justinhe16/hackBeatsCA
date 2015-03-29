@@ -1,2 +1,0 @@
-# CreateYourOwnMixtape
-$wag money $wag!!!!! 
